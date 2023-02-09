@@ -6,13 +6,18 @@
 /*   By: twinters <twinters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:27:57 by twinters          #+#    #+#             */
-/*   Updated: 2023/02/09 18:39:24 by twinters         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:22:36 by twinters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	check_args(int argc, char **argv);
+
+/*
+	TODO:
+		Lancer les threads et ecrire une routine
+*/
 
 int	main(int argc, char **argv)
 {
