@@ -1,8 +1,8 @@
 CC = gcc
 NAME = philo
-SRC = main.c utils.c setup.c threads.c
+SRC = main.c utils.c setup.c threads.c actions.c running_settings.c
 OBJ=$(SRC:.c=.o)
-CFLAGS = -Werror -Wall -Wextra -g -pthread
+CFLAGS = -Werror -Wall -Wextra -g3 -pthread
 LFLAGS = -lpthread
 
 all : $(NAME)

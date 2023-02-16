@@ -6,7 +6,7 @@
 /*   By: twinters <twinters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:58:46 by twinters          #+#    #+#             */
-/*   Updated: 2023/02/09 15:59:44 by twinters         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:02:07 by twinters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,12 @@ int	ft_isnumber(char *string)
 		i++;
 	}
 	return (1);
+}
+
+unsigned int	get_time_stamp(void)
+{	
+	struct timeval	value;
+
+	gettimeofday(&value, NULL);
+	return (value.tv_sec * 1000 + value.tv_usec / 1000);
 }

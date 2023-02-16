@@ -6,18 +6,13 @@
 /*   By: twinters <twinters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:24:18 by twinters          #+#    #+#             */
-/*   Updated: 2023/02/09 19:24:19 by twinters         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:49:47 by twinters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	check_args(int argc, char **argv);
-
-/*
-	TODO:
-		Lancer les threads et ecrire une routine
-*/
 
 int	main(int argc, char **argv)
 {
@@ -26,7 +21,8 @@ int	main(int argc, char **argv)
 	check_args(argc, argv);
 	setup_parameters(argv, &data);
 	launch_threads(&data);
-	free(data.philo);
+	wait_threads(&data);
+	free(data.philos);
 	free(data.threads);
 	return (0);
 }
@@ -46,7 +42,7 @@ static void	check_args(int argc, char **argv)
 	{
 		if (!ft_isnumber(argv[i]))
 		{
-			error += printf("Error: Arguments must be numbers.\n");
+			error += printf("Error: Arguments must be unsigned numbers.\n");
 			break ;
 		}
 		i++;
@@ -54,4 +50,3 @@ static void	check_args(int argc, char **argv)
 	if (error)
 		exit(1);
 }
-
