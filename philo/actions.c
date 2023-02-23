@@ -24,26 +24,29 @@ void	print_action(t_philosophers *philo, char *action)
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
-static void	philo_eat(t_philosophers *philo)
+static t_bool	philo_eat(t_philosophers *philo)
 {
 	pthread_mutex_lock(&philo->fork);
 	print_action(philo, "has taken a fork");
+	if (!philo->left_fork)
+		return (false);
 	pthread_mutex_lock(philo->left_fork);
 	print_action(philo, "has taken a fork");
-	print_action(philo, "\e[32mis eating\e[0m");
-	pthread_mutex_lock(&philo->mutex_meal);
+	print_action(philo, "is eating");
+	pthread_mutex_lock(&philo->data->death_check_mutex);
 	philo->last_meal = get_time_stamp() - philo->data->time;
 	philo->nb_meal++;
-	pthread_mutex_unlock(&philo->mutex_meal);
+	pthread_mutex_unlock(&philo->data->death_check_mutex);
 	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(&philo->fork);
+	return (true);
 }
 
 static void	philo_sleep(t_philosophers *philo)
 {
 	print_action(philo, "is sleeping");
-	usleep(philo->data->time_to_sleep);
+	usleep(philo->data->time_to_sleep * 1000);
 }
 
 static void	philo_think(t_philosophers *philo)
@@ -60,7 +63,8 @@ void	*philo_routine(void *ptr)
 		usleep(5000);
 	while (check_if_running(philo->data))
 	{
-		philo_eat(philo);
+		if (!philo_eat(philo))
+			break ;
 		philo_sleep(philo);
 		philo_think(philo);
 	}

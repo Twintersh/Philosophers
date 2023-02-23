@@ -20,7 +20,6 @@ static void	set_philosophers(t_data *data)
 	while (i < data->nb_philosophers)
 	{
 		pthread_mutex_init(&data->philos[i].fork, NULL);
-		pthread_mutex_init(&data->philos[i].mutex_meal, NULL);
 		if (i > 0)
 			data->philos[i].left_fork = &data->philos[i - 1].fork;
 		data->philos[i].fat = false;
@@ -30,7 +29,11 @@ static void	set_philosophers(t_data *data)
 		data->philos[i].data = data;
 		i++;
 	}
-	data->philos[0].left_fork = &data->philos[i - 1].fork;
+	printf("%d\n", i);
+	if (&data->philos[i - 1] != &data->philos[0])
+		data->philos[0].left_fork = &data->philos[i - 1].fork;
+	else
+		data->philos[0].left_fork = NULL;
 }
 
 void	setup_parameters(char **argv, t_data *data)

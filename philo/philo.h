@@ -34,7 +34,6 @@ typedef struct s_philosophers
 	struct s_data	*data;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	mutex_meal;
 }t_philosophers;
 
 typedef struct s_data
