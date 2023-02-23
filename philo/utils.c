@@ -6,17 +6,30 @@
 /*   By: twinters <twinters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:58:46 by twinters          #+#    #+#             */
-/*   Updated: 2023/02/15 11:02:07 by twinters         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:11:51 by twinters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *str)
+t_bool ft_strcmp(char *str1, char *str2)
 {
-	int	i;
-	int	num;
-	int	minus;
+	int i;
+	
+	i = 0;
+	while (str1[i] && str2[i] && str1[i] == str2[i])
+		i++;
+	if (str1[i] && str2[i])
+		return (false);
+	else
+		return (true);
+}
+
+unsigned int	ft_atoi(const char *str)
+{
+	int				i;
+	unsigned int	num;
+	int				minus;
 
 	i = 0;
 	num = 0;

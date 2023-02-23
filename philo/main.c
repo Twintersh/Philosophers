@@ -6,7 +6,7 @@
 /*   By: twinters <twinters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:24:18 by twinters          #+#    #+#             */
-/*   Updated: 2023/02/15 19:49:47 by twinters         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:09:39 by twinters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ static void	check_args(int argc, char **argv);
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	pthread_t	checker;
+	t_data		data;
 
 	check_args(argc, argv);
 	setup_parameters(argv, &data);
 	launch_threads(&data);
+	pthread_create(&checker, NULL, checker_philos_alive, &data);
 	wait_threads(&data);
+	pthread_join(checker, NULL);
 	free(data.philos);
 	free(data.threads);
 	return (0);
@@ -47,6 +50,8 @@ static void	check_args(int argc, char **argv)
 		}
 		i++;
 	}
+	if (argv[5] && !ft_atoi(argv[5]))
+		error += printf("Error: The number of meal must be greater than 0.\n");
 	if (error)
-		exit(1);
+		exit(error % 255);
 }
