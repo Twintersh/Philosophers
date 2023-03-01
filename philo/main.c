@@ -6,7 +6,7 @@
 /*   By: twinters <twinters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:24:18 by twinters          #+#    #+#             */
-/*   Updated: 2023/02/21 14:09:39 by twinters         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:57:43 by twinters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ static void	check_args(int argc, char **argv)
 		}
 		i++;
 	}
-	if (argv[5] && !ft_atoi(argv[5]))
+	if (i >= 6 && !ft_atoi(argv[5]))
 		error += printf("Error: The number of meal must be greater than 0.\n");
+	if (argv[1] && !ft_atoi(argv[1]))
+		error += printf("Error: The number of philos must be greater than 0.\n");
 	if (error)
 		exit(error % 255);
 }

@@ -33,6 +33,7 @@ typedef struct s_philosophers
 	unsigned int	nb_meal;
 	struct s_data	*data;
 	pthread_mutex_t	fork;
+	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	*left_fork;
 }t_philosophers;
 
@@ -57,7 +58,6 @@ void			setup_parameters(char **argv, t_data *data);
 // utils.c
 unsigned int	ft_atoi(const char *str);
 int				ft_isnumber(char *str);
-t_bool			ft_strcmp(char *str1, char *str2);
 unsigned int	get_time_stamp(void);
 
 // actions.c
@@ -69,7 +69,7 @@ void			wait_threads(t_data *data);
 void			launch_threads(t_data *data);
 
 // check_if_running.c
-enum bool	check_if_running(t_data *data);
+enum bool		check_if_running(t_data *data);
 void			set_running_to_false(t_data *data, t_philosophers *philo);
 
 // checker.c

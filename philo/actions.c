@@ -33,11 +33,11 @@ static t_bool	philo_eat(t_philosophers *philo)
 	pthread_mutex_lock(philo->left_fork);
 	print_action(philo, "has taken a fork");
 	print_action(philo, "is eating");
-	pthread_mutex_lock(&philo->data->death_check_mutex);
+	pthread_mutex_lock(&philo->eat_mutex);
 	philo->last_meal = get_time_stamp() - philo->data->time;
-	philo->nb_meal++;
-	pthread_mutex_unlock(&philo->data->death_check_mutex);
 	usleep(philo->data->time_to_eat * 1000);
+	philo->nb_meal++;
+	pthread_mutex_unlock(&philo->eat_mutex);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(&philo->fork);
 	return (true);

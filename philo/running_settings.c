@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "./philo.h"
-  
+
 t_bool	check_if_running(t_data *data)
 {
 	t_bool	value;
@@ -24,7 +24,7 @@ t_bool	check_if_running(t_data *data)
 
 void	set_running_to_false(t_data *data, t_philosophers *philo)
 {
-	unsigned int time;
+	unsigned int	time;
 
 	pthread_mutex_lock(&data->death_check_mutex);
 	if (philo)

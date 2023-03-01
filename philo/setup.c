@@ -19,6 +19,7 @@ static void	set_philosophers(t_data *data)
 	i = 0;
 	while (i < data->nb_philosophers)
 	{
+		pthread_mutex_init(&data->philos[i].eat_mutex, NULL);
 		pthread_mutex_init(&data->philos[i].fork, NULL);
 		if (i > 0)
 			data->philos[i].left_fork = &data->philos[i - 1].fork;
@@ -29,8 +30,7 @@ static void	set_philosophers(t_data *data)
 		data->philos[i].data = data;
 		i++;
 	}
-	printf("%d\n", i);
-	if (&data->philos[i - 1] != &data->philos[0])
+	if (data->nb_philosophers != 1)
 		data->philos[0].left_fork = &data->philos[i - 1].fork;
 	else
 		data->philos[0].left_fork = NULL;
@@ -46,6 +46,8 @@ void	setup_parameters(char **argv, t_data *data)
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5])
 		data->nb_philos_eat = ft_atoi(argv[5]);
+	else
+		data->nb_philos_eat = 0;
 	data->philos = malloc(sizeof(t_philosophers) * data->nb_philosophers);
 	data->threads = malloc(sizeof(pthread_t) * data->nb_philosophers);
 	set_philosophers(data);

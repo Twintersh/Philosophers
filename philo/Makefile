@@ -8,16 +8,15 @@ LFLAGS = -lpthread
 all : $(NAME)
 
 %.o : %.c
-	@$(CC) $(CFLAGS) $(LFLAGS) $(INCL) -c $< -o $@
+	$(CC) $(CFLAGS) $(LFLAGS) $(INCL) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME)
 
 re : fclean all
 
 clean :
-	@rm -rf $(OBJ)
-	@echo Done
+	rm -rf $(OBJ)
 
 fclean : clean
 	@rm -rf $(NAME)
