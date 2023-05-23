@@ -16,9 +16,9 @@ static unsigned int	get_last_meal(t_philosophers *philo)
 {
 	unsigned int	value;
 
-	pthread_mutex_lock(&philo->eat_mutex);
+	pthread_mutex_lock(&philo->data->death_check_mutex);
 	value = philo->last_meal;
-	pthread_mutex_unlock(&philo->eat_mutex);
+	pthread_mutex_unlock(&philo->data->death_check_mutex);
 	return (value);
 }
 
@@ -78,7 +78,6 @@ void	*checker_philos_alive(void *ptr)
 		}
 		usleep(100);
 		i++;
-	// printf("%d\n", i % nb_philo);
 	}
 	return (NULL);
 }
